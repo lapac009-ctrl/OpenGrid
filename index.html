@@ -2,136 +2,254 @@
 <html lang="sr">
 <head>
     <meta charset="UTF-8">
-    <title>Nexus Core | Platforma Budućnosti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Core | 2026 Platforma</title>
     <style>
+        :root {
+            --bg-dark: #080810;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --neon-blue: #00f2fe;
+            --text-main: #ffffff;
+            --text-dim: #b0b0b0;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            height: 100vh;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
+            height: 100vh;
             overflow: hidden;
         }
 
-        /* Glavni kontejner sa Glassmorphism efektom */
-        .dashboard {
-            width: 900px;
-            height: 600px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
-        }
-
-        /* Sidebar (Meni sa strane) */
+        /* --- SIDEBAR --- */
         .sidebar {
-            width: 200px;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            width: 240px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border);
             padding: 20px;
+            display: flex;
+            flex-direction: column;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #00f2fe;
-            margin-bottom: 50px;
-            text-shadow: 0 0 10px #00f2fe;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
         }
 
         .menu-item {
-            padding: 15px;
-            margin-bottom: 10px;
+            padding: 12px 15px;
+            margin-bottom: 8px;
             cursor: pointer;
-            transition: 0.3s;
-            border-radius: 10px;
+            border-radius: 8px;
+            transition: 0.2s;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            font-weight: 500;
         }
 
-        .menu-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #4facfe;
+        .menu-item:hover, .menu-item.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
         }
 
-        /* Glavni sadržaj */
+        .menu-item.active {
+            border-left: 3px solid var(--neon-blue);
+        }
+
+        /* --- MAIN CONTENT --- */
         .main-content {
             flex: 1;
-            padding: 40px;
+            padding: 30px 50px;
+            overflow-y: auto;
         }
 
-        .welcome-text h1 {
-            font-size: 40px;
-            margin-bottom: 10px;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
+        .search-bar {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 20px;
+            width: 300px;
+            color: var(--text-main);
+        }
+
+        /* --- Prijatelji (Connections) --- */
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .friends-scroll {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+        }
+
+        .friend-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        .friend-avatar {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: #202030; /* placeholder */
+            border: 2px solid var(--border);
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .status-online {
+            width: 12px;
+            height: 12px;
+            background: #00ff88;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            border: 2px solid var(--bg-dark);
+        }
+
+        .friend-name {
+            font-size: 12px;
+            color: var(--text-dim);
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        /* --- Igre (Continue) --- */
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 25px;
         }
 
-        /* Kartice za igre */
         .game-card {
-            background: rgba(255, 255, 255, 0.1);
-            height: 150px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid transparent;
-            transition: 0.4s;
+            background: var(--glass);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: 0.3s;
             cursor: pointer;
         }
 
         .game-card:hover {
-            border-color: #00f2fe;
             transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
         }
 
-        .btn-create {
-            background: linear-gradient(90deg, #00f2fe, #4facfe);
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
+        .game-thumbnail {
+            width: 100%;
+            height: 180px;
+            background: #1a1a2a; /* placeholder */
         }
+
+        .game-info {
+            padding: 15px;
+        }
+
+        .game-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .game-stats {
+            font-size: 12px;
+            color: var(--text-dim);
+            display: flex;
+            justify-content: space-between;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="dashboard">
-        <div class="sidebar">
-            <div class="logo">NEXUS</div>
-            <div class="menu-item">Home</div>
-            <div class="menu-item">Discover</div>
-            <div class="menu-item">Studio (Beta)</div>
-            <div class="menu-item">Avatars</div>
+    <div class="sidebar">
+        <div class="logo">NEXUS</div>
+        <div class="menu-item active">Home</div>
+        <div class="menu-item">Discover</div>
+        <div class="menu-item">Marketplace</div>
+        <div class="menu-item">Avatar Editor</div>
+        <div class="menu-item">Studio</div>
+        <div class="menu-item">Settings</div>
+    </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <h1 style="margin:0;">Home</h1>
+            <input type="text" class="search-bar" placeholder="Pretraži igre...">
         </div>
-        
-        <div class="main-content">
-            <div class="welcome-text">
-                <h1>Dobrodošao nazad</h1>
-                <p>Budućnost kreiranja je u tvojim rukama.</p>
-            </div>
 
-            <div class="game-grid">
-                <div class="game-card">Tvoja Igra 1</div>
-                <div class="game-card">Tvoja Igra 2</div>
-                <div class="game-card" style="border: 2px dashed rgba(255,255,255,0.2);">+ Nova Igra</div>
-            </div>
-
-            <button class="btn-create">POKRENI STUDIO</button>
+        <div class="section-title">Prijatelji (Online)</div>
+        <div class="friends-scroll">
+            <script>
+                for(let i=1; i<=10; i++) {
+                    document.write(`
+                        <div class="friend-card">
+                            <div class="friend-avatar"><div class="status-online"></div></div>
+                            <div class="friend-name">Korisnik_${i}</div>
+                        </div>
+                    `);
+                }
+            </script>
         </div>
+
+        <div class="section-title">Nastavi da igraš</div>
+        <div class="game-grid">
+            <script>
+                const games = [
+                    {title: "Neon Racing 2026", rating: "98%", playing: "12K"},
+                    {title: "Voxel Builders", rating: "95%", playing: "8K"},
+                    {title: "CyberRP", rating: "92%", playing: "25K"},
+                    {title: "Cube Defense", rating: "90%", playing: "5K"},
+                    {title: "Gravity Zero", rating: "97%", playing: "10K"},
+                    {title: "Pixel Wars", rating: "89%", playing: "7K"}
+                ];
+                games.forEach(game => {
+                    document.write(`
+                        <div class="game-card">
+                            <div class="game-thumbnail"></div>
+                            <div class="game-info">
+                                <div class="game-title">${game.title}</div>
+                                <div class="game-stats">
+                                    <span>👍 ${game.rating}</span>
+                                    <span>👤 ${game.playing}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+
     </div>
 
 </body>
